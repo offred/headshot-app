@@ -18,14 +18,12 @@ export function ResultsGrid({
       <div className="flex items-end justify-between mb-8">
         <div>
           <div
-            className="font-mono text-xs tracking-[0.3em] uppercase mb-2"
-            style={{ color: "var(--green)" }}
+            className="font-mono text-xs tracking-[0.3em] uppercase mb-2 text-green"
           >
             Complete
           </div>
           <h2
-            className="font-display text-3xl"
-            style={{ color: "var(--text)" }}
+            className="font-display text-3xl text-primary"
           >
             {results.length} Headshot{results.length !== 1 ? "s" : ""}{" "}
             Processed
@@ -34,40 +32,34 @@ export function ResultsGrid({
         <div className="flex gap-3">
           <button
             onClick={onReset}
-            className="py-2.5 px-5 rounded-lg text-sm font-medium transition-colors cursor-pointer"
-            style={{
-              backgroundColor: "var(--surface-raised)",
-              color: "var(--text-secondary)",
-              border: "1px solid var(--border)",
-            }}
+            className="py-2.5 px-5 rounded-lg text-sm font-medium transition-colors cursor-pointer bg-surface-raised text-secondary border border-border"
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor =
-                "var(--surface-hover)";
-              e.currentTarget.style.color = "var(--text)";
+                "var(--color-surface-hover)";
+              e.currentTarget.style.color = "var(--color-primary)";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.backgroundColor =
-                "var(--surface-raised)";
-              e.currentTarget.style.color = "var(--text-secondary)";
+                "var(--color-surface-raised)";
+              e.currentTarget.style.color = "var(--color-secondary)";
             }}
           >
             New Batch
           </button>
           <button
             onClick={onDownloadZip}
-            className="py-2.5 px-5 rounded-lg text-sm font-medium transition-all duration-300 cursor-pointer flex items-center gap-2"
+            className="py-2.5 px-5 rounded-lg text-sm font-medium transition-all duration-300 cursor-pointer flex items-center gap-2 bg-accent"
             style={{
-              backgroundColor: "var(--accent)",
-              color: "var(--black)",
-              boxShadow: "0 0 20px var(--accent-glow-strong)",
+              color: "var(--color-background)",
+              boxShadow: "0 0 20px var(--color-accent-glow-strong)",
             }}
             onMouseEnter={(e) =>
             (e.currentTarget.style.boxShadow =
-              "0 0 40px var(--accent-glow-strong)")
+              "0 0 40px var(--color-accent-glow-strong)")
             }
             onMouseLeave={(e) =>
             (e.currentTarget.style.boxShadow =
-              "0 0 20px var(--accent-glow-strong)")
+              "0 0 20px var(--color-accent-glow-strong)")
             }
           >
             <svg
@@ -98,11 +90,7 @@ export function ResultsGrid({
             style={{ animationDelay: `${i * 0.06}s` }}
           >
             <div
-              className="aspect-square rounded-xl overflow-hidden transition-transform duration-300 group-hover:scale-[1.02]"
-              style={{
-                backgroundColor: "var(--surface)",
-                border: "1px solid var(--border-subtle)",
-              }}
+              className="aspect-square rounded-xl overflow-hidden transition-transform duration-300 group-hover:scale-[1.02] bg-surface border border-border-subtle"
             >
               {/* Checkered background for transparency */}
               <div
@@ -128,10 +116,9 @@ export function ResultsGrid({
             <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-end justify-center pb-4 bg-linear-to-t from-black/70 via-transparent to-transparent">
               <button
                 onClick={() => onDownloadImage(img)}
-                className="py-1.5 px-4 rounded-lg text-xs font-medium cursor-pointer transition-colors"
+                className="py-1.5 px-4 rounded-lg text-xs font-medium cursor-pointer transition-colors text-primary"
                 style={{
                   backgroundColor: "rgba(255,255,255,0.15)",
-                  color: "var(--text)",
                   backdropFilter: "blur(8px)",
                   border: "1px solid rgba(255,255,255,0.1)",
                 }}
@@ -142,8 +129,7 @@ export function ResultsGrid({
 
             {/* Filename */}
             <p
-              className="mt-2 text-xs truncate font-mono"
-              style={{ color: "var(--text-tertiary)" }}
+              className="mt-2 text-xs truncate font-mono text-tertiary"
             >
               {img.name}
             </p>

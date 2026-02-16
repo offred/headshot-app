@@ -1,21 +1,21 @@
 @import "tailwindcss";
 
-:root {
-  --black: #0a0a0a;
-  --surface: #111111;
-  --surface-raised: #1a1a1a;
-  --surface-hover: #222222;
-  --border: #2a2a2a;
-  --border-subtle: #1e1e1e;
-  --text: #e8e4df;
-  --text-secondary: #8a8580;
-  --text-tertiary: #5a5550;
-  --accent: #e05a7a;
-  --accent-dim: #c44866;
-  --accent-glow: rgba(224, 90, 122, 0.15);
-  --accent-glow-strong: rgba(224, 90, 122, 0.3);
-  --red: #c45c4a;
-  --green: #5aab6e;
+@theme {
+  --color-background: #0a0a0a;
+  --color-surface: #111111;
+  --color-surface-raised: #1a1a1a;
+  --color-surface-hover: #222222;
+  --color-border: #2a2a2a;
+  --color-border-subtle: #1e1e1e;
+  --color-primary: #e8e4df;
+  --color-secondary: #8a8580;
+  --color-tertiary: #5a5550;
+  --color-accent: #e05a7a;
+  --color-accent-dim: #c44866;
+  --color-accent-glow: rgba(224, 90, 122, 0.15);
+  --color-accent-glow-strong: rgba(224, 90, 122, 0.3);
+  --color-red: #c45c4a;
+  --color-green: #5aab6e;
 }
 
 * {
@@ -25,8 +25,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--black);
-  color: var(--text);
+  @apply bg-background text-primary;
   font-family: "Plus Jakarta Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -59,20 +58,20 @@ body::before {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--black);
+  background: var(--color-background);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--border);
+  background: var(--color-border);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--text-tertiary);
+  background: var(--color-tertiary);
 }
 
 /* Upload zone pulse animation */
 @keyframes border-pulse {
-  0%, 100% { border-color: var(--border); }
-  50% { border-color: var(--accent-dim); }
+  0%, 100% { border-color: var(--color-border); }
+  50% { border-color: var(--color-accent-dim); }
 }
 
 @keyframes fade-in-up {
@@ -116,9 +115,9 @@ body::before {
 .animate-shimmer {
   background: linear-gradient(
     90deg,
-    var(--surface-raised) 25%,
-    var(--surface-hover) 50%,
-    var(--surface-raised) 75%
+    var(--color-surface-raised) 25%,
+    var(--color-surface-hover) 50%,
+    var(--color-surface-raised) 75%
   );
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;

@@ -155,13 +155,15 @@ export default function Home() {
           : "Processing\u2026";
 
   return (
-    <div className="min-h-screen" style={{ background: "var(--black)" }}>
+    <div
+      className="min-h-screen bg-background"
+    >
       {/* Ambient glow */}
       <div
         className="pointer-events-none fixed top-0 left-1/2 -translate-x-1/2 w-200 h-150 -translate-y-1/2"
         style={{
           background:
-            "radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 70%)",
+            "radial-gradient(ellipse at center, var(--color-accent-glow) 0%, transparent 70%)",
         }}
       />
 

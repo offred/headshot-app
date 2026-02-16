@@ -8,16 +8,14 @@ export function ProcessingSkeleton({ phaseLabel, fileCount }: ProcessingSkeleton
     <div className="mt-12 animate-fade-in">
       <div className="flex items-center gap-3 mb-6">
         <div
-          className="w-2 h-2 rounded-full"
+          className="w-2 h-2 rounded-full bg-accent"
           style={{
-            backgroundColor: "var(--accent)",
-            boxShadow: "0 0 8px var(--accent-glow-strong)",
+            boxShadow: "0 0 8px var(--color-accent-glow-strong)",
             animation: "fade-in 0.8s ease-in-out infinite alternate",
           }}
         />
         <span
-          className="font-mono text-xs tracking-wider uppercase"
-          style={{ color: "var(--accent-dim)" }}
+          className="font-mono text-xs tracking-wider uppercase text-accent-dim"
         >
           {phaseLabel}
         </span>

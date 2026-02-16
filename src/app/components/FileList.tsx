@@ -21,8 +21,7 @@ export function FileList({
     <div className="mt-6 space-y-2 animate-fade-in">
       <div className="flex items-center justify-between mb-3">
         <span
-          className="font-mono text-xs tracking-wider uppercase"
-          style={{ color: "var(--text-secondary)" }}
+          className="font-mono text-xs tracking-wider uppercase text-secondary"
         >
           {files.length} file{files.length !== 1 ? "s" : ""} selected
         </span>
@@ -31,13 +30,12 @@ export function FileList({
             e.stopPropagation();
             onClearAll();
           }}
-          className="font-mono text-xs tracking-wider uppercase transition-colors cursor-pointer"
-          style={{ color: "var(--text-tertiary)" }}
+          className="font-mono text-xs tracking-wider uppercase transition-colors cursor-pointer text-tertiary"
           onMouseEnter={(e) =>
-            (e.currentTarget.style.color = "var(--red)")
+            (e.currentTarget.style.color = "var(--color-red)")
           }
           onMouseLeave={(e) =>
-            (e.currentTarget.style.color = "var(--text-tertiary)")
+            (e.currentTarget.style.color = "var(--color-tertiary)")
           }
         >
           Clear all
@@ -47,29 +45,22 @@ export function FileList({
       {files.map((file, i) => (
         <div
           key={`${file.name}-${i}`}
-          className="flex items-center justify-between py-2.5 px-4 rounded-lg transition-colors"
-          style={{
-            backgroundColor: "var(--surface-raised)",
-            border: "1px solid var(--border-subtle)",
-          }}
+          className="flex items-center justify-between py-2.5 px-4 rounded-lg transition-colors bg-surface-raised border border-border-subtle"
         >
           <div className="flex items-center gap-3 min-w-0">
             <div
-              className="w-8 h-8 rounded shrink-0 bg-cover bg-center"
+              className="w-8 h-8 rounded shrink-0 bg-cover bg-center border border-border"
               style={{
                 backgroundImage: `url(${URL.createObjectURL(file)})`,
-                border: "1px solid var(--border)",
               }}
             />
             <span
-              className="text-sm truncate"
-              style={{ color: "var(--text)" }}
+              className="text-sm truncate text-primary"
             >
               {file.name}
             </span>
             <span
-              className="font-mono text-xs shrink-0"
-              style={{ color: "var(--text-tertiary)" }}
+              className="font-mono text-xs shrink-0 text-tertiary"
             >
               {(file.size / 1024).toFixed(0)}KB
             </span>
@@ -79,13 +70,12 @@ export function FileList({
               e.stopPropagation();
               onRemoveFile(i);
             }}
-            className="ml-3 p-1 rounded transition-colors cursor-pointer"
-            style={{ color: "var(--text-tertiary)" }}
+            className="ml-3 p-1 rounded transition-colors cursor-pointer text-tertiary"
             onMouseEnter={(e) =>
-              (e.currentTarget.style.color = "var(--red)")
+              (e.currentTarget.style.color = "var(--color-red)")
             }
             onMouseLeave={(e) =>
-              (e.currentTarget.style.color = "var(--text-tertiary)")
+              (e.currentTarget.style.color = "var(--color-tertiary)")
             }
           >
             <svg
@@ -106,15 +96,10 @@ export function FileList({
 
       {/* Export Size */}
       <div
-        className="mt-4 flex items-center justify-between py-3 px-4 rounded-lg"
-        style={{
-          backgroundColor: "var(--surface-raised)",
-          border: "1px solid var(--border-subtle)",
-        }}
+        className="mt-4 flex items-center justify-between py-3 px-4 rounded-lg bg-surface-raised border border-border-subtle"
       >
         <span
-          className="font-mono text-xs tracking-wider uppercase"
-          style={{ color: "var(--text-secondary)" }}
+          className="font-mono text-xs tracking-wider uppercase text-secondary"
         >
           Export size
         </span>
@@ -130,12 +115,12 @@ export function FileList({
               style={{
                 backgroundColor:
                   exportSize === size
-                    ? "var(--accent)"
+                    ? "var(--color-accent)"
                     : "transparent",
                 color:
                   exportSize === size
-                    ? "var(--black)"
-                    : "var(--text-tertiary)",
+                    ? "var(--color-background)"
+                    : "var(--color-tertiary)",
                 fontWeight: exportSize === size ? 600 : 400,
               }}
             >
@@ -153,22 +138,22 @@ export function FileList({
           className="w-full py-4 px-6 rounded-xl font-medium text-sm tracking-wide transition-all duration-300 cursor-pointer disabled:cursor-not-allowed"
           style={{
             backgroundColor: processing
-              ? "var(--surface-raised)"
-              : "var(--accent)",
-            color: processing ? "var(--text-secondary)" : "var(--black)",
+              ? "var(--color-surface-raised)"
+              : "var(--color-accent)",
+            color: processing ? "var(--color-secondary)" : "var(--color-base)",
             boxShadow: processing
               ? "none"
-              : "0 0 30px var(--accent-glow-strong)",
+              : "0 0 30px var(--color-accent-glow-strong)",
           }}
           onMouseEnter={(e) => {
             if (!processing)
               e.currentTarget.style.boxShadow =
-                "0 0 50px var(--accent-glow-strong)";
+                "0 0 50px var(--color-accent-glow-strong)";
           }}
           onMouseLeave={(e) => {
             if (!processing)
               e.currentTarget.style.boxShadow =
-                "0 0 30px var(--accent-glow-strong)";
+                "0 0 30px var(--color-accent-glow-strong)";
           }}
         >
           {processing ? (

@@ -8,10 +8,9 @@ export function Header() {
       <nav className="flex items-center justify-between mb-20 animate-fade-in-up">
         <div className="flex items-center gap-3">
           <Logo
-            className="h-8 w-auto"
+            className="h-8 w-auto text-accent"
             style={{
-              color: "var(--accent)",
-              filter: "drop-shadow(0 0 12px var(--accent-glow-strong))",
+              filter: "drop-shadow(0 0 12px var(--color-accent-glow-strong))",
             }}
           />
           <div
@@ -19,8 +18,7 @@ export function Header() {
             style={{ backgroundColor: "rgba(255, 255, 255, 0.15)" }}
           />
           <span
-            className="text-sm font-medium tracking-wide"
-            style={{ color: "var(--text-secondary)" }}
+            className="text-sm font-medium tracking-wide text-secondary"
           >
             TellyDraft.com
           </span>
@@ -33,15 +31,13 @@ export function Header() {
           }}
         >
           <div
-            className="w-1.5 h-1.5 rounded-full"
+            className="w-1.5 h-1.5 rounded-full bg-accent"
             style={{
-              backgroundColor: "var(--accent)",
-              boxShadow: "0 0 6px var(--accent-glow-strong)",
+              boxShadow: "0 0 6px var(--color-accent-glow-strong)",
             }}
           />
           <span
-            className="font-mono text-[10px] tracking-widest uppercase"
-            style={{ color: "var(--accent-dim)" }}
+            className="font-mono text-[10px] tracking-widest uppercase text-accent-dim"
           >
             Production Tool
           </span>
@@ -61,16 +57,14 @@ export function Header() {
 
         <div className="relative text-center max-w-3xl mx-auto">
           <h1
-            className="font-display text-7xl sm:text-8xl tracking-tight leading-[0.9] mb-5"
-            style={{ color: "var(--text)" }}
+            className="font-display text-6xl md:text-8xl tracking-tight leading-[0.9] mb-5 text-primary"
           >
             Headshot
             <br />
-            <span style={{ color: "var(--accent)" }}>Processor</span>
+            <span className="text-accent">Processor</span>
           </h1>
           <p
-            className="text-base max-w-md mx-auto leading-relaxed"
-            style={{ color: "var(--text-secondary)" }}
+            className="text-sm md:text-base max-w-md mx-auto leading-relaxed text-secondary"
           >
             Upload cast photos, auto-crop faces &amp; strip backgrounds.
             <br />

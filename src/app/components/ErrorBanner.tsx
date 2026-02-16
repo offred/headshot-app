@@ -11,7 +11,7 @@ export function ErrorBanner({ error }: ErrorBannerProps) {
         borderColor: "rgba(196, 92, 74, 0.3)",
       }}
     >
-      <p className="text-sm" style={{ color: "var(--red)" }}>
+      <p className="text-sm text-red">
         {error}
       </p>
     </div>
