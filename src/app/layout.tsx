@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Headshot Processor",
+  title: "Headshot Processor | Automatically detect faces, crop, remove backgrounds",
   description: "Upload cast photos, crop faces, and remove backgrounds. Download production-ready transparent PNGs for TellyDraft.com.",
   icons: {
     icon: "/favicon/favicon.ico",
