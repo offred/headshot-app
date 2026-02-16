@@ -4,6 +4,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Headshot Processor",
   description: "Process cast headshots for Survivor seasons",
+  icons: {
+    icon: "/favicon/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -14,6 +17,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="icon" href="/favicon/favicon-dark.png" type="image/png" media="(prefers-color-scheme: dark)" />
+        <link rel="icon" href="/favicon/favicon-light.png" type="image/png" media="(prefers-color-scheme: light)" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
