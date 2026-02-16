@@ -21,7 +21,7 @@ export function Header() {
             href="https://tellydraft.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-medium tracking-wide text-secondary hover:text-primary transition-colors"
+            className="text-sm font-medium tracking-wide text-secondary hover:text-primary transition-colors rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           >
             TellyDraft.com
           </a>

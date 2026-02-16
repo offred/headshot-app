@@ -9,7 +9,7 @@ export function Footer() {
             href="https://offred.co"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-sans text-xs text-tertiary hover:text-secondary transition-colors"
+            className="font-sans text-xs text-tertiary hover:text-secondary transition-colors rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           >
             &copy; {new Date().getFullYear()} Off Red, LLC.
           </a>
@@ -18,7 +18,7 @@ export function Footer() {
           href="https://tellydraft.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="font-sans text-xs text-tertiary hover:text-secondary transition-colors"
+          className="font-sans text-xs text-tertiary hover:text-secondary transition-colors rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
           TellyDraft Production Tools
         </a>
