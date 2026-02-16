@@ -78,6 +78,6 @@ models/
 
 1. Open the app in your browser
 2. Drag and drop cast photos (JPG, PNG, or WebP) or click to browse
-3. Select export size (1000px or 500px)
+3. Select export size (500px or 1000px)
 4. Click **Process** — faces are detected and images cropped on the server, then backgrounds are removed in your browser
 5. Preview results and download individually or as a ZIP

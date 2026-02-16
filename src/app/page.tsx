@@ -27,7 +27,7 @@ export default function Home() {
   const [zipBlob, setZipBlob] = useState<Blob | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [dragOver, setDragOver] = useState(false);
-  const [exportSize, setExportSize] = useState<1000 | 500>(1000);
+  const [exportSize, setExportSize] = useState<500 | 1000>(500);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const addFiles = useCallback((newFiles: FileList | File[]) => {

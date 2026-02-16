@@ -1,13 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import sharp from "sharp";
-// @ts-expect-error -- onnxruntime-web types don't resolve under "exports" in this version
-import * as ort from "onnxruntime-web";
 import JSZip from "jszip";
 import path from "path";
 import fs from "fs";
 
-const VALID_SIZES = new Set([1000, 500]);
-const DEFAULT_SIZE = 1000;
+const VALID_SIZES = new Set([500, 1000]);
+const DEFAULT_SIZE = 500;
 const TOP_PADDING_PX = 20;
 const ALLOWED_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp"]);
 
@@ -15,23 +13,37 @@ const ALLOWED_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp"]);
 const MODEL_WIDTH = 640;
 const MODEL_HEIGHT = 480;
 
-let session: ort.InferenceSession | null = null;
+// Dynamic import so onnxruntime-web's WASM files aren't resolved at build time
+let ort: typeof import("onnxruntime-web") | null = null;
 
-async function getSession(): Promise<ort.InferenceSession> {
-  if (session) return session;
+async function getOrt() {
+  if (ort) return ort;
+  ort = await import("onnxruntime-web");
 
-  // Point onnxruntime-web to its WASM files for Node.js server usage
-  const wasmDir = path.join(
+  // Read the WASM binary directly from disk to bypass path resolution issues
+  // (file:// URLs, spaces in paths, Vercel bundling)
+  const wasmPath = path.join(
     process.cwd(),
     "node_modules",
     "onnxruntime-web",
-    "dist"
+    "dist",
+    "ort-wasm-simd-threaded.wasm"
   );
-  ort.env.wasm.wasmPaths = wasmDir + "/";
+  ort.env.wasm.wasmBinary = fs.readFileSync(wasmPath);
+  ort.env.wasm.numThreads = 1;
 
+  return ort;
+}
+
+let session: import("onnxruntime-web").InferenceSession | null = null;
+
+async function getSession() {
+  if (session) return session;
+
+  const ortModule = await getOrt();
   const modelPath = path.join(process.cwd(), "models", "ultraface_640.onnx");
   const modelBuffer = fs.readFileSync(modelPath);
-  session = await ort.InferenceSession.create(modelBuffer.buffer, {
+  session = await ortModule.InferenceSession.create(modelBuffer.buffer, {
     executionProviders: ["wasm"],
   });
   return session;
@@ -74,7 +86,8 @@ async function detectFaces(
     }
   }
 
-  const inputTensor = new ort.Tensor("float32", float32Data, [
+  const { Tensor } = await getOrt();
+  const inputTensor = new Tensor("float32", float32Data, [
     1,
     3,
     MODEL_HEIGHT,

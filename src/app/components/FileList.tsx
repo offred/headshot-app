@@ -1,10 +1,10 @@
 interface FileListProps {
   files: File[];
-  exportSize: 1000 | 500;
+  exportSize: 500 | 1000;
   processing: boolean;
   onRemoveFile: (index: number) => void;
   onClearAll: () => void;
-  onSetExportSize: (size: 1000 | 500) => void;
+  onSetExportSize: (size: 500 | 1000) => void;
   onProcess: () => void;
 }
 
@@ -119,7 +119,7 @@ export function FileList({
           Export size
         </span>
         <div className="flex gap-1">
-          {([1000, 500] as const).map((size) => (
+          {([500, 1000] as const).map((size) => (
             <button
               key={size}
               onClick={(e) => {
