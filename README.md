@@ -26,7 +26,7 @@ An internal production tool by **Off Red, LLC** for [TellyDraft.com](https://tel
 
 ### Prerequisites
 
-- Node.js 25+
+- Node.js 24.x
 - npm
 
 ### Installation
