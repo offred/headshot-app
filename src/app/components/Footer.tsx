@@ -5,17 +5,23 @@ export function Footer() {
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2.5">
-          <span
-            className="font-sans text-xs text-tertiary"
+          <a
+            href="https://offred.co"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-sans text-xs text-tertiary hover:text-secondary transition-colors"
           >
             &copy; {new Date().getFullYear()} Off Red, LLC.
-          </span>
+          </a>
         </div>
-        <p
-          className="font-sans text-xs text-tertiary"
+        <a
+          href="https://tellydraft.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-sans text-xs text-tertiary hover:text-secondary transition-colors"
         >
           TellyDraft Production Tools
-        </p>
+        </a>
       </div>
     </footer>
   );

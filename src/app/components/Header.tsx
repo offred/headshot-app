@@ -17,11 +17,14 @@ export function Header() {
             className="h-5 w-px"
             style={{ backgroundColor: "rgba(255, 255, 255, 0.15)" }}
           />
-          <span
-            className="text-sm font-medium tracking-wide text-secondary"
+          <a
+            href="https://tellydraft.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm font-medium tracking-wide text-secondary hover:text-primary transition-colors"
           >
             TellyDraft.com
-          </span>
+          </a>
         </div>
         <div
           className="flex items-center gap-2 py-1.5 px-3 rounded-full"
