@@ -1,0 +1,33 @@
+{
+  "name": "headshot-app",
+  "description": "An internal production tool by offred.co for TellyDraft.com",
+  "version": "0.1.0",
+  "author": "Putra Bonaccorsi <putra@offred.co>",
+  "private": true,
+  "engines": {
+    "node": ">=25"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@imgly/background-removal-node": "^1.4.5",
+    "jszip": "^3.10.1",
+    "next": "^15.1.0",
+    "onnxruntime-web": "^1.24.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "sharp": "^0.34.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.0"
+  }
+}
