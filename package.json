@@ -14,10 +14,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@imgly/background-removal-node": "^1.4.5",
+    "@imgly/background-removal": "^1.7.0",
     "jszip": "^3.10.1",
     "next": "^15.1.0",
-    "onnxruntime-web": "^1.24.1",
+    "onnxruntime-web": "^1.21.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sharp": "^0.34.5"

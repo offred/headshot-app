@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import sharp from "sharp";
-import { removeBackground } from "@imgly/background-removal-node";
+// @ts-expect-error -- onnxruntime-web types don't resolve under "exports" in this version
 import * as ort from "onnxruntime-web";
 import JSZip from "jszip";
 import path from "path";
@@ -19,6 +19,16 @@ let session: ort.InferenceSession | null = null;
 
 async function getSession(): Promise<ort.InferenceSession> {
   if (session) return session;
+
+  // Point onnxruntime-web to its WASM files for Node.js server usage
+  const wasmDir = path.join(
+    process.cwd(),
+    "node_modules",
+    "onnxruntime-web",
+    "dist"
+  );
+  ort.env.wasm.wasmPaths = wasmDir + "/";
+
   const modelPath = path.join(process.cwd(), "models", "ultraface_640.onnx");
   const modelBuffer = fs.readFileSync(modelPath);
   session = await ort.InferenceSession.create(modelBuffer.buffer, {
@@ -191,7 +201,7 @@ async function processImage(fileBuffer: Buffer, targetSize: number): Promise<Buf
     ? headshotCrop(imgWidth, imgHeight, face)
     : fallbackCrop(imgWidth, imgHeight);
 
-  // Crop and resize to 1000x1000
+  // Crop and resize
   const croppedBuffer = await sharp(fileBuffer)
     .extract({
       left: crop.left,
@@ -203,15 +213,7 @@ async function processImage(fileBuffer: Buffer, targetSize: number): Promise<Buf
     .png()
     .toBuffer();
 
-  // Remove background
-  const uint8 = new Uint8Array(croppedBuffer);
-  const blob = new Blob([uint8], { type: "image/png" });
-  const resultBlob = await removeBackground(blob, {
-    output: { format: "image/png" },
-  });
-  const resultBuffer = Buffer.from(await resultBlob.arrayBuffer());
-
-  return resultBuffer;
+  return croppedBuffer;
 }
 
 export async function POST(request: NextRequest) {
@@ -266,7 +268,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const zipBuffer = await zip.generateAsync({ type: "nodebuffer" });
+    // Use STORE compression (no deflate) so the client can parse the ZIP
+    // with the simple local-file-header reader without needing decompression
+    const zipBuffer = await zip.generateAsync({
+      type: "nodebuffer",
+      compression: "STORE",
+    });
 
     return new NextResponse(new Uint8Array(zipBuffer), {
       headers: {
