@@ -13,11 +13,15 @@ const ALLOWED_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp"]);
 const MODEL_WIDTH = 640;
 const MODEL_HEIGHT = 480;
 
-// Dynamic import so onnxruntime-web's WASM files aren't resolved at build time
-let ort: typeof import("onnxruntime-web") | null = null;
+// Dynamic import so onnxruntime-web's WASM files aren't resolved at build time.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let ort: any = null;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let session: any = null;
 
 async function getOrt() {
   if (ort) return ort;
+  // @ts-expect-error -- onnxruntime-web types don't resolve under "exports" in v1.21
   ort = await import("onnxruntime-web");
 
   // Read the WASM binary directly from disk to bypass path resolution issues
@@ -34,8 +38,6 @@ async function getOrt() {
 
   return ort;
 }
-
-let session: import("onnxruntime-web").InferenceSession | null = null;
 
 async function getSession() {
   if (session) return session;
