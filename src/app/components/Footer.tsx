@@ -20,7 +20,7 @@ export function Footer() {
           rel="noopener noreferrer"
           className="font-sans text-xs text-tertiary hover:text-secondary transition-colors rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
-          TellyDraft Production Tools
+          TellyDraft.com Production Tools
         </a>
       </div>
     </footer>

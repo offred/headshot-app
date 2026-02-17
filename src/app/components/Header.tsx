@@ -70,7 +70,6 @@ export function Header() {
             className="text-sm md:text-base max-w-md mx-auto leading-relaxed text-secondary"
           >
             Upload cast photos, auto-crop faces &amp; strip backgrounds.
-            <br />
             Download production-ready transparent PNGs.
           </p>
         </div>
