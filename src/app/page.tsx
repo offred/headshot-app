@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { removeBackground } from "@imgly/background-removal";
 import { Header } from "./components/Header";
 import { UploadZone } from "./components/UploadZone";
@@ -30,6 +30,14 @@ export default function Home() {
   const [exportSize, setExportSize] = useState<500 | 1000>(500);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  // Revoke all blob URLs on unmount to free memory
+  useEffect(() => {
+    return () => {
+      results.forEach((r) => URL.revokeObjectURL(r.url));
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const addFiles = useCallback((newFiles: FileList | File[]) => {
     const allowed = [".jpg", ".jpeg", ".png", ".webp"];
     const valid = Array.from(newFiles).filter((f) =>
@@ -37,7 +45,10 @@ export default function Home() {
     );
     setFiles((prev) => [...prev, ...valid]);
     setError(null);
-    setResults([]);
+    setResults((prev) => {
+      prev.forEach((r) => URL.revokeObjectURL(r.url));
+      return [];
+    });
     setZipBlob(null);
   }, []);
 
