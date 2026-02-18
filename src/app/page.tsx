@@ -77,23 +77,31 @@ export default function Home() {
     setBgProgress({ done: 0, total: 0 });
 
     try {
-      // Phase 1: Server crops the images
-      const formData = new FormData();
-      files.forEach((f) => formData.append("files", f));
-      formData.append("size", String(exportSize));
+      // Phase 1: Server crops images one at a time to stay under Vercel's 4.5MB body limit
+      const croppedImages: ProcessedImage[] = [];
+      setBgProgress({ done: 0, total: files.length });
 
-      const res = await fetch("/api/process", {
-        method: "POST",
-        body: formData,
-      });
+      for (let i = 0; i < files.length; i++) {
+        const formData = new FormData();
+        formData.append("files", files[i]);
+        formData.append("size", String(exportSize));
 
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({ error: "Processing failed" }));
-        throw new Error(err.error || `Server error ${res.status}`);
+        const res = await fetch("/api/process", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({ error: "Processing failed" }));
+          console.error(`Failed to process ${files[i].name}: ${err.error}`);
+          continue;
+        }
+
+        const zipArrayBuffer = await (await res.blob()).arrayBuffer();
+        const extracted = await extractPngsFromZip(zipArrayBuffer);
+        croppedImages.push(...extracted);
+        setBgProgress({ done: i + 1, total: files.length });
       }
-
-      const zipArrayBuffer = await (await res.blob()).arrayBuffer();
-      const croppedImages = await extractPngsFromZip(zipArrayBuffer);
 
       if (croppedImages.length === 0) {
         throw new Error("No images were returned from the server");
@@ -158,7 +166,7 @@ export default function Home() {
 
   const phaseLabel =
     phase === "cropping"
-      ? "Cropping headshots\u2026"
+      ? `Cropping headshots\u2026 (${bgProgress.done}/${files.length})`
       : phase === "removing-bg"
         ? `Removing backgrounds\u2026 (${bgProgress.done}/${bgProgress.total})`
         : phase === "building-zip"
